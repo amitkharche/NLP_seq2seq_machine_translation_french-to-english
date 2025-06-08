@@ -1,0 +1,7 @@
+bonjour	hello
+salut	hi
+merci	thank you
+au revoir	goodbye
+je suis fatigué	i am tired
+je t'aime	i love you
+comment ça va	how are you
