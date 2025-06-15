@@ -1,148 +1,208 @@
-# 🌍 Seq2Seq Machine Translation – French to English ✨
 
-![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.0+-orange.svg)
-![License](https://img.shields.io/github/license/your-username/seq2seq-machine-translation)
+---
+# 🌍 French-to-English Neural Machine Translation 🇫🇷→🇬🇧
 
-![Thumbnail](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Sequence_to_sequence_learning_diagram.svg/512px-Sequence_to_sequence_learning_diagram.svg.png)
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)](https://www.tensorflow.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.25+-red.svg)](https://streamlit.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## 📘 Overview
-This project demonstrates how to build **neural machine translation** systems using **Sequence-to-Sequence (Seq2Seq)** architectures:
+## 🧠 Project Overview
 
-- ✅ Basic Encoder-Decoder Model (Keras Functional API)
-- 🔁 Attention-enhanced Seq2Seq (Bahdanau attention)
-- 🖥️ Streamlit Web App for live demo
-- 📊 BLEU Score Evaluation
-- 📚 Teaching Jupyter Notebooks
-- 🧠 Pre-trained tokenizers and models
-- 🚀 GitHub-ready codebase for learning and deployment
+This project demonstrates **Neural Machine Translation (NMT)** from **French to English** using:
+
+- 📦 Basic **Seq2Seq model** (Encoder-Decoder LSTM)
+- 💡 **Attention-enhanced Seq2Seq model**
+- 🎯 **BLEU Score Evaluation**
+- 🌐 **Streamlit Web App** for interactive translation
 
 ---
 
-## 📂 Project Structure
-```
-seq2seq_machine_translation/
-├── data/                     # Sample French-English dataset
-├── models/                   # Saved models (basic + attention)
-├── notebooks/                # Teaching notebooks (basic + attention)
-├── scripts/                  # Training scripts
-├── streamlit_app/            # Streamlit interface
-├── utils/                    # Tokenizer + decoder helpers
-├── output/                   # BLEU evaluation and attention plots
-├── LICENSE
-├── requirements.txt
-├── .gitignore
-└── README.md
+## 📁 Folder Structure
+
 ```
 
+NLP\_seq2seq\_machine\_translation\_french-to-english/
+│
+├── scripts/                         # Training & evaluation scripts
+│   ├── train\_basic\_seq2seq.py
+│   ├── train\_attention\_seq2seq.py
+│   └── evaluate\_bleu.py
+│
+├── streamlit\_app/                   # Streamlit interface
+│   └── app.py
+│
+├── utils/                           # Utilities
+│   ├── decode\_utils.py
+│   ├── tokenizer\_utils.py
+│   └── attention\_plot.py
+│
+├── data/                            # Dataset
+│   └── french\_english\_pairs.txt
+│
+├── models/                          # Saved models & tokenizers
+│   ├── basic\_encoder.h5
+│   ├── basic\_decoder.h5
+│   ├── attention\_seq2seq.h5
+│   ├── tokenizer\_in.pkl
+│   └── tokenizer\_out.pkl
+│
+├── README.md
+└── requirements.txt
+
+```
+
 ---
 
-## 🛠️ Setup
+## 📄 Dataset
+
+- **Location**: `data/french_english_pairs.txt`
+- **Format**: Tab-separated French–English sentence pairs
+```
+
+bonjour	hello
+merci beaucoup	thank you very much
+
+````
+
+---
+
+## ⚙️ Setup Instructions
+
+### ✅ 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/seq2seq-machine-translation.git
-cd seq2seq-machine-translation
+git clone https://github.com/amitkharche/NLP_seq2seq_machine_translation_french-to-english.git
+cd NLP_seq2seq_machine_translation_french-to-english
+````
+
+### ✅ 2. Create and Activate Virtual Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate          # On Windows: venv\Scripts\activate
+```
+
+### ✅ 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
+If the file is missing, install manually:
+
+```bash
+pip install tensorflow streamlit nltk matplotlib seaborn
+```
+
 ---
 
-## 🚀 Usage
+## 🚀 How to Use
 
-### 🧠 Train Models
+### 🔹 Step 1: Train the Models
 
-```bash
-python scripts/train_with_tokenizer.py                # Train basic model
-python scripts/train_attention_with_tokenizer.py      # Train attention model
-```
-
-### 🌐 Run Streamlit App
+#### ➤ Basic Seq2Seq
 
 ```bash
-streamlit run streamlit_app/app.py
+python scripts/train_basic_seq2seq.py
 ```
 
-### 📏 BLEU Score Evaluation
+#### ➤ Attention Seq2Seq
+
+```bash
+python scripts/train_attention_seq2seq.py
+```
+
+This saves the models under `models/`:
+
+* `basic_seq2seq.h5`, `basic_encoder.h5`, `basic_decoder.h5`
+* `attention_seq2seq.h5`
+* `tokenizer_in.pkl`, `tokenizer_out.pkl`
+
+---
+
+### 🔹 Step 2: Evaluate BLEU Score
 
 ```bash
 python scripts/evaluate_bleu.py
 ```
 
+You'll get scores like:
+
+```
+=== BASIC MODEL EVALUATION ===
+BLEU Score: 0.6701
+
+=== ATTENTION MODEL EVALUATION ===
+BLEU Score: 0.8154
+
+=== FINAL COMPARISON ===
+Basic Seq2Seq BLEU: 0.6701
+Attention Seq2Seq BLEU: 0.8154
+```
+
 ---
 
-## 🧪 Demo Screenshots
+### 🔹 Step 3: Launch Streamlit App
 
-| Basic Seq2Seq | Attention Model |
-|---------------|-----------------|
-| ![Basic](https://i.imgur.com/J3hjRjA.png) | ![Attention](https://i.imgur.com/FZnU23I.png) |
+```bash
+streamlit run streamlit_app/app.py
+```
+
+Features:
+
+* Choose between **Basic** or **Attention** model
+* Input any French sentence or use preloaded examples
+* See translation + optional attention heatmap
+* Save your translations
+* Debug and view model/tokenizer status
+
+---
+
+## 🎯 Key Features
+
+| Feature             | Description                                        |
+| ------------------- | -------------------------------------------------- |
+| ✅ Basic Seq2Seq     | Standard LSTM Encoder-Decoder model                |
+| ✨ Attention Layer   | Custom layer for dynamic word-level context        |
+| 📊 BLEU Evaluation  | Objective translation quality comparison           |
+| 🌐 Streamlit UI     | Easy interface to test translation results         |
+| 📈 Visual Attention | Simulated attention heatmap for demo understanding |
+
+---
+
+## 📌 Requirements
+
+* Python ≥ 3.8
+* TensorFlow ≥ 2.8
+* Streamlit ≥ 1.22
+* NLTK, NumPy, Matplotlib, Seaborn
+
+---
+
+## 🛠️ Improvements You Can Make
+
+* Add **beam search** decoding for better outputs
+* Fine-tune attention weights to support **live visualization**
+* Use **transformer architectures** (e.g. BERT2BERT, MarianMT)
+* Integrate **multi-language translation** features
+
+---
+
+## 📬 Let's Connect
+
+Have questions or want to collaborate?
+
+* 🔗 [LinkedIn](https://www.linkedin.com/in/amit-kharche)
+* 🧠 [Medium](https://medium.com/@amitkharche14)
+* 💻 [GitHub](https://github.com/amitkharche)
 
 ---
 
 ## 📜 License
-This project is licensed under the [MIT License](LICENSE).
+
+This project is released under the **MIT License**. See [LICENSE](LICENSE) for details.
 
 ---
-
-## 🙌 Credits
-Built using:
-- TensorFlow & Keras
-- Streamlit
-- NLTK BLEU
-- Seaborn & Matplotlib
-
-Inspired by:
-- Stanford NLP
-- OpenNMT
-
----
-
-## 🧭 How to Run This Project (Step-by-Step)
-
-### 🛠️ 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/seq2seq-machine-translation.git
-cd seq2seq-machine-translation
-```
-
-### 🧪 2. Install Required Packages
-```bash
-pip install -r requirements.txt
-```
-
-### 🧠 3. Train the Models
-
-#### ▶️ Train the Basic Encoder-Decoder Model
-```bash
-python scripts/train_with_tokenizer.py
-```
-
-#### ▶️ Train the Attention-based Seq2Seq Model
-```bash
-python scripts/train_attention_with_tokenizer.py
-```
-
-> These scripts will also save the tokenizers used during preprocessing.
-
-### 🧠 4. Run BLEU Score Evaluation
-```bash
-python scripts/evaluate_bleu.py
-```
-
-### 🌐 5. Launch the Streamlit Translation App
-```bash
-streamlit run streamlit_app/app.py
-```
-
-You can now enter a French sentence and:
-- Select either the basic or attention-based model
-- View translation output
-- Optionally display the attention heatmap (if using attention-based model)
-
----
-
-## ✅ Tips
-- Trained models are saved to `models/` and loaded automatically by the app
-- Tokenizers are stored as pickled files in `utils/`
-- Sample data can be modified or extended in `data/french_english_pairs.txt`

@@ -2,6 +2,19 @@ bonjour	hello
 salut	hi
 merci	thank you
 au revoir	goodbye
-je suis fatigué	i am tired
-je t'aime	i love you
-comment ça va	how are you
+comment allez vous	how are you
+je vais bien	i am fine
+quel est votre nom	what is your name
+je m appelle marie	my name is marie
+ou habitez vous	where do you live
+j habite a paris	i live in paris
+quelle heure est il	what time is it
+il est trois heures	it is three o clock
+avez vous faim	are you hungry
+oui j ai faim	yes i am hungry
+que faites vous	what do you do
+je suis etudiant	i am a student
+parlez vous anglais	do you speak english
+un peu	a little bit
+c est delicieux	it is delicious
+je vous en prie	you are welcome
